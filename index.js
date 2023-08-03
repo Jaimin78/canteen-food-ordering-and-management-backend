@@ -10,7 +10,7 @@ app.use(express.json());
 
 //Routes
 app.use('/api/user', require('./routes/user'));
-
+app.use('/api/item', require('./routes/item'));
 // app.get('/', (req, res) => {
 //   res.send('<h3>Hello</h3>')
 // })
