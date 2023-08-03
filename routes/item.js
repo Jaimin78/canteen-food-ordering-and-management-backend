@@ -19,11 +19,11 @@ const upload = multer({ storage: storage });
 //save items : api/item/add
 app.post('/add', upload.single('image'), async (req, res) => {
     try {
-        const { name, description, price, availability } = req.body;
+        const { name, description, price, availability, type, category } = req.body;
         const image = req.file.filename; // Assuming the 'image' field contains the uploaded file
 
         // Create a new item using the Item model
-        const newItem = new Items({ name, description, price, image, availability });
+        const newItem = new Items({ name, description, price, image, availability, type, category });
         await newItem.save();
         await newItem.save();
 
