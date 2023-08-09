@@ -12,7 +12,7 @@ app.post('/register', async (req, res) => {
         save = save.toObject()
         delete save.password
 
-        Jwt.sign({ save }, jwtKey, { expiresIn: '2h' }, (err, token) => {
+        Jwt.sign({ save }, jwtKey, (err, token) => {
             if (err) {
                 return res.status(404).json({ error: "The user already exist" })
             }
@@ -32,7 +32,7 @@ app.post('/login', async (req, res) => {
                 return res.status(404).json({ error: "user not found" })
             }
 
-            Jwt.sign({ find }, jwtKey, { expiresIn: '2h' }, (err, token) => {
+            Jwt.sign({ find }, jwtKey, (err, token) => {
                 if (err) {
                     return res.status(404).json({ error: "user not found" })
                 }
