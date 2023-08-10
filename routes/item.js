@@ -1,5 +1,6 @@
 const express = require('express');
 const Items = require('../models/Items');
+const Order = require('../models/Order')
 const multer = require('multer');
 const tokenVerification = require('../middleware/tokenVerification');
 const app = express()
@@ -43,4 +44,17 @@ app.get('/get', tokenVerification, async (req, res) => {
     }
 });
 
+//Order item : api/item/order 
+app.post('/order', tokenVerification, async (req, res) => {
+    try {
+        console.log(req.body.customerName)
+        const newOrder = new Order(req.body);
+        await newOrder.save();
+        await newOrder.save();
+        res.status(201).json({ success: true, message: 'Order created successfully' });
+    }
+    catch (error) {
+        res.status(500).json({ success: false, message: 'Failed to order items', error: error.message })
+    }
+})
 module.exports = app;
